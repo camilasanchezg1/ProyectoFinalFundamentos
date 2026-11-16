@@ -1,0 +1,84 @@
+DIAGNÓSTICO DE CALIDAD (datos originales, antes de transformar)
+orders: (865, 14) | order_details: (2215, 5)
+
+1. Valores faltantes (vacíos)
+-----------------------------
+orders:
+  ship_region: 525 (60.69 %)
+  freight: 27 (3.12 %)
+  shipped_date: 23 (2.66 %)
+  ship_postal_code: 21 (2.43 %)
+  customer_id: 16 (1.85 %)
+  ship_city: 15 (1.73 %)
+  employee_id: 12 (1.39 %)
+  ship_name: 12 (1.39 %)
+  order_date: 11 (1.27 %)
+  required_date: 11 (1.27 %)
+  ship_country: 10 (1.16 %)
+order_details:
+  discount: 31 (1.40 %)
+  unit_price: 25 (1.13 %)
+  quantity: 20 (0.90 %)
+  product_id: 15 (0.68 %)
+unit_price escrito como texto: N/A = 8, free = 6
+
+2. Registros duplicados
+-----------------------
+orders: filas idénticas repetidas = 25; mismo order_id con contenido distinto = 10
+  columnas que difieren entre las copias: ['ship_name']
+order_details: filas idénticas repetidas = 60; repetidas por order_id + product_id tras quitar idénticas = 0
+
+3. Tipos de dato incorrectos (valores no convertibles)
+------------------------------------------------------
+order_details.order_id: no numéricos = 1, con decimales = 0
+order_details.product_id: no numéricos = 0, con decimales = 0
+order_details.unit_price: no numéricos = 28
+order_details.quantity: no numéricos = 3, con decimales = 3
+order_details.discount: no numéricos = 9
+orders.order_id: no numéricos = 0
+orders.employee_id: no numéricos = 0
+orders.ship_via: no numéricos = 0
+orders.freight: no numéricos = 16
+orders.order_date: fuera de AAAA-MM-DD = 64
+orders.required_date: fuera de AAAA-MM-DD = 60
+orders.shipped_date: fuera de AAAA-MM-DD = 61
+
+4. Formatos inconsistentes
+--------------------------
+orders.customer_id: 26 valores con espacios al inicio o al final
+orders.ship_name: 27 valores con espacios al inicio o al final
+orders.ship_city: 26 valores con espacios al inicio o al final
+order_details.order_id: 6 valores con espacios al inicio o al final
+order_details.order_id con '.0' al final: 3
+ship_country: 66 filas con país no estándar (28 variantes)
+Formatos de fecha en orders:
+                         order_date  required_date  shipped_date
+AAAA-MM-DD (correcto)           790            794           781
+AAAA/MM/DD                        9              3            13
+AAAAMMDD                          9              7            11
+D de mes de AAAA                 13             11             5
+DD-MM-AAAA o MM-DD-AAAA           8             10             8
+DD.MM.AA                         10              3            11
+DD/MM/AAAA o MM/DD/AAAA          10             11             9
+Mes DD, AAAA                      5             15             4
+vacío                            11             11            23
+
+5. Valores fuera de rango
+-------------------------
+quantity <= 0: 5 | quantity > 130: 1
+discount fuera de los valores típicos: 15
+freight < 0: 4
+
+6. Integridad entre tablas
+--------------------------
+order_id de order_details sin pedido en orders (tal como vienen): 15
+tras normalizar espacios y '.0': 6 líneas sin pedido ['19473', '19475', '19484', '19550', '19614', 'A10363']
+
+7. Caracteres mal codificados
+-----------------------------
+orders.ship_name: 20 valores con caracteres extraños
+orders.ship_address: 8 valores con caracteres extraños
+orders.ship_city: 11 valores con caracteres extraños
+orders.ship_postal_code: 7 valores con caracteres extraños
+orders: 46 celdas afectadas
+order_details: 0 celdas afectadas

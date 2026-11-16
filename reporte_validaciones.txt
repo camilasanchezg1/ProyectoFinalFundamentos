@@ -1,0 +1,28 @@
+REPORTE DE VALIDACIONES
+=======================
+
+[OK] C1 unicidad de order_id en orders: 830 filas, 830 order_id únicos
+[OK] C1 unicidad de order_id + product_id en order_details: 0 claves repetidas
+[OK] C2 reconciliación inicial de líneas: 2215 = 2200 + 15
+[OK] C2 reconciliación inicial de importes: 1254983.16 = 1250608.41 + 4374.75
+[OK] C3 conservación de líneas de order_details: 2215 = 60 duplicadas + 2149 con pedido + 6 huérfanas
+[OK] C3 conservación de pedidos: 830 order_id distintos en origen, 830 en orders limpio
+[OK] C4 toda línea tiene pedido: 0 líneas sin pedido
+[OK] C4 todo pedido tiene al menos una línea: 0 pedidos sin líneas
+[OK] C5 tipos de dato correctos: numéricos, enteros Int64 y fechas datetime
+[OK] C6 quantity entre 1 y 130: mín 1, máx 130
+[OK] C6 discount entre 0 y 0.25: mín 0.0, máx 0.25
+[OK] C6 freight >= 0: mín 0.02
+[OK] C6 unit_price > 0: mín 2.0
+[OK] C7 ningún envío antes del pedido: 0 casos
+[OK] C7 ninguna fecha requerida antes del pedido: 0 casos
+[OK] C8 países estándar: 0 filas con país no estándar
+[OK] C8 sin caracteres mal codificados: 0 celdas
+[OK] C8 sin espacios al inicio o al final: 0 celdas
+[OK] C9 la unión conserva las líneas: 2149 antes, 2149 después
+[OK] C9 la unión conserva los pedidos: 830 de 830 pedidos
+[OK] C9 el importe total se conserva al unir: 1,249,945.73 antes, 1,249,945.73 después
+[OK] C10 archivo consolidado guardado completo: esperado (2149, 19), leído (2149, 19)
+[OK] C10 archivo huérfanas guardado completo: esperado (6, 5), leído (6, 5)
+
+Total: 23 controles, 23 OK, 0 con falla
