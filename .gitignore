@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema operativo y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Registro de ejecución (se genera en cada corrida)
+outputs/*.log
+
+# Secretos: nunca se publican credenciales, tokens ni claves
+.env
+*.key

@@ -1,0 +1,3 @@
+# Dependencias del proyecto. Solo se necesita pandas (numpy se instala junto con él).
+# Probado con Python 3.12 y pandas 3.0.6.
+pandas>=2.0,<4
